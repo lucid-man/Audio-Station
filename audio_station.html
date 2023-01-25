@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Station App</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="audio_station.css">
+</head>
+<body>
+    <h1>Audio Station</h1>
+    <button id="btninitialize" class="btn btn-warning btn-lg border" onclick="init()">Initialize</button>
+    
+    <div id="maincontainer" class="container hidden">
+        <button id="btngeneratesound" class="btn btn-secondary border" onclick="generateSound()">Generate Sound</button>
+        <button id="btnstopsound" class="btn btn-secondary border" onclick="stopSound()">Stop Sound</button>
+        
+        <div id="audiochannel0" class="audiochannel">
+            
+            <div id="osc-0" class="block audiosource-block">
+                <h5>OSCILLATOR 1</h5>
+                <label>Wave</label>
+                <select id="wave-0" onchange="setOscillatorType(this)">
+                    <option value="sine">sine</option>
+                    <option value="square">square</option>
+                    <option value="sawtooth">sawtooth</option>
+                    <option value="triangle">triangle</option>
+                </select>
+                <br>
+                <label>Frequency</label>
+                <select id="freqnote-0" onchange="setOscillatorFrequencyNote(this)">
+                    <option value="C">C</option>
+                    <option value="Db">Db</option>
+                    <option value="D">D</option>
+                    <option value="Eb">Eb</option>
+                    <option value="E">E</option>
+                    <option value="F">F</option>
+                    <option value="Gb">Gb</option>
+                    <option value="G">G</option>
+                    <option value="Ab">Ab</option>
+                    <option value="A" selected>A</option>
+                    <option value="Bb">Bb</option>
+                    <option value="B">B</option>
+                </select>
+                <select id="freqoctave-0" onchange="setOscillatorFrequencyOctave(this)">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4" selected>4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                </select>
+                <br>
+                <label>Detune</label>
+                <input id="detune-0" onchange="setOscillatorDetune(this)" type="range" max="100", min="-100">
+            </div>
+
+
+            <div id="filter-0" class="block effect-block">
+                <h5>Filter 1</h5>
+                <label>Type</label>
+                <select id="type-0" onchange="setFilterType(this)">
+                    <option value="lowpass">lowpass</option>
+                    <option value="highpass">highpass</option>
+                    <option value="bandpass">bandpass</option>
+                    <option value="lowshelf">lowshelf</option>
+                    <option value="highshelf">highshelf</option>
+                    <option value="peaking">peaking</option>
+                    <option value="notch">notch</option>
+                    <option value="allpass">allpass</option>
+                </select>
+                <br>
+                <label>Frequency</label>
+                <input id="freq-0"type="range" min="20" max="20000" onchange="setFilterFrequency(this)">
+                <br>
+                <label>Q</label>
+                <input id="Q-0" type="range" min="0" max="1" step="0.1" onchange="setFilterQ(this)">
+                <br>
+                <label>Gain</label>
+                <input id="filtergain-0" type="range" min="0" max="1" step="0.1" onchange="setFilterGain(this)">  
+            </div>
+
+
+            <div id="gain-0" class="block effect-block">
+                <h5>Gain 1</h5>
+                <label>Gain</label>
+                <input id="gain-0" type="range"min="0" max="1" step="0.1" onchange="setGain(this)">
+            </div>
+
+        </div>
+        <div id="audiochannel1" class="audiochannel">
+            
+            <div id="osc-1" class="block audiosource-block">
+                <h5>OSCILLATOR 2</h5>
+                <label>Wave</label>
+                <select id="wave-1" onchange="setOscillatorType(this)">
+                    <option value="sine">sine</option>
+                    <option value="square">square</option>
+                    <option value="sawtooth">sawtooth</option>
+                    <option value="triangle">triangle</option>
+                </select>
+                <br>
+                <label>Frequency</label>
+                <select id="freqnote-1" onchange="setOscillatorFrequencyNote(this)">
+                    <option value="C">C</option>
+                    <option value="Db">Db</option>
+                    <option value="D">D</option>
+                    <option value="Eb">Eb</option>
+                    <option value="E">E</option>
+                    <option value="F">F</option>
+                    <option value="Gb">Gb</option>
+                    <option value="G">G</option>
+                    <option value="Ab">Ab</option>
+                    <option value="A" selected>A</option>
+                    <option value="Bb">Bb</option>
+                    <option value="B">B</option>
+                </select>
+                <select id="freqoctave-1" onchange="setOscillatorFrequencyOctave(this)">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4" selected>4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                </select>
+                <br>
+                <label>Detune</label>
+                <input id="detune-1" onchange="setOscillatorDetune(this)" type="range" max="100", min="-100">
+            </div>
+
+
+            <div id="filter-1" class="block effect-block">
+                <h5>Filter 2</h5>
+                <label>Type</label>
+                <select id="type-1" onchange="setFilterType(this)">
+                    <option value="lowpass">lowpass</option>
+                    <option value="highpass">highpass</option>
+                    <option value="bandpass">bandpass</option>
+                    <option value="lowshelf">lowshelf</option>
+                    <option value="highshelf">highshelf</option>
+                    <option value="peaking">peaking</option>
+                    <option value="notch">notch</option>
+                    <option value="allpass">allpass</option>
+                </select>
+                <br>
+                <label>Frequency</label>
+                <input id="freq-1"type="range" min="20" max="20000" onchange="setFilterFrequency(this)">
+                <br>
+                <label>Q</label>
+                <input id="Q-1" type="range" min="0" max="1" step="0.1" onchange="setFilterQ(this)">
+                <br>
+                <label>Gain</label>
+                <input id="filtergain-1" type="range" min="0" max="1" step="0.1" onchange="setFilterGain(this)">  
+            </div>
+
+
+            <div id="gain-1" class="block effect-block">
+                <h5>Gain 2</h5>
+                <label>Gain</label>
+                <input id="gain-1" type="range"min="0" max="1" step="0.1" onchange="setGain(this)">
+            </div>
+
+        </div>
+        <div id="audiochannel2" class="audiochannel">
+            
+            <div id="osc-2" class="block audiosource-block">
+                <h5>OSCILLATOR 3</h5>
+                <label>Wave</label>
+                <select id="wave-2" onchange="setOscillatorType(this)">
+                    <option value="sine">sine</option>
+                    <option value="square">square</option>
+                    <option value="sawtooth">sawtooth</option>
+                    <option value="triangle">triangle</option>
+                </select>
+                <br>
+                <label>Frequency</label>
+                <select id="freqnote-2" onchange="setOscillatorFrequencyNote(this)">
+                    <option value="C">C</option>
+                    <option value="Db">Db</option>
+                    <option value="D">D</option>
+                    <option value="Eb">Eb</option>
+                    <option value="E">E</option>
+                    <option value="F">F</option>
+                    <option value="Gb">Gb</option>
+                    <option value="G">G</option>
+                    <option value="Ab">Ab</option>
+                    <option value="A" selected>A</option>
+                    <option value="Bb">Bb</option>
+                    <option value="B">B</option>
+                </select>
+                <select id="freqoctave-2" onchange="setOscillatorFrequencyOctave(this)">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4" selected>4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                </select>
+                <br>
+                <label>Detune</label>
+                <input id="detune-2" onchange="setOscillatorDetune(this)" type="range" max="100", min="-100">
+            </div>
+
+
+            <div id="filter-2" class="block effect-block">
+                <h5>Filter 3</h5>
+                <label>Type</label>
+                <select id="type-2" onchange="setFilterType(this)">
+                    <option value="lowpass">lowpass</option>
+                    <option value="highpass">highpass</option>
+                    <option value="bandpass">bandpass</option>
+                    <option value="lowshelf">lowshelf</option>
+                    <option value="highshelf">highshelf</option>
+                    <option value="peaking">peaking</option>
+                    <option value="notch">notch</option>
+                    <option value="allpass">allpass</option>
+                </select>
+                <br>
+                <label>Frequency</label>
+                <input id="freq-2"type="range" min="20" max="20000" onchange="setFilterFrequency(this)">
+                <br>
+                <label>Q</label>
+                <input id="Q-2" type="range" min="0" max="1" step="0.1" onchange="setFilterQ(this)">
+                <br>
+                <label>Gain</label>
+                <input id="filtergain-2" type="range" min="0" max="1" step="0.1" onchange="setFilterGain(this)">  
+            </div>
+
+
+            <div id="gain-2" class="block effect-block">
+                <h5>Gain 3</h5>
+                <label>Gain</label>
+                <input id="gain-2" type="range"min="0" max="1" step="0.1" onchange="setGain(this)">
+            </div>
+
+        </div>
+
+
+        
+    </div>
+    
+        
+
+    <script src="audio_station.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+
+</body>
+</html>
